@@ -51,28 +51,68 @@ Remember:
 //         move the nth disk from `from` to `to`  // Step 2: Move the nth disk from `from` to `to`
 //         hanoi(via, from, to, n-1, moves)    // Step 3: Move n-1 disks from `via` to `to`
 // }
- 
+
 export const hanoi = (from, via, to, n, moves) => {
-   alert("complete hanoi function first!")
+   if(n==1)
+      moves.push([from , to])
+   else{
+      hanoi(from , to , via , n-1 , moves)
+      moves.push([from , to])
+      hanoi(via , from , to , n-1 , moves)
+   }
 
 }
 
 export const exhanoi_1 = (A, B, C, n, moves) => {
-  alert("complete exhanoi_1 function first!")
-
+   if(n==1){
+      hanoi(C , A , B , 2 , moves)
+      moves.push([A , C])
+      hanoi(B , A , C , 2 , moves)
+   }else{
+      exhanoi_1(A , B , C , n-1 , moves)
+      hanoi(C , B , A , 3*n-1 , moves)
+      hanoi(A , B , C , 3*n , moves)
+   }
 }
 
 export const exhanoi_2 = (A, B, C, n, moves) => {
-  alert("complete exhanoi_2 function first!")
+   if(n==1){
+      moves.push([A , C])
+      moves.push([B , C])
+   }else{
+      exhanoi_2(A , B , C , n-1 , moves)
+      moves.push([B , A])
+      hanoi(C , B , A , 2*n-2 , moves)
+      hanoi(A , B , C , 2*n , moves)
+   }
 
 }
-  
+
 export const exhanoi_3 = (A, B, C, n, moves) => {
-  alert("complete exhanoi_3 function first!")
+   if(n==1){
+      moves.push([C , B])
+      moves.push([A , B])
+      hanoi(B , A , C , 3 , moves)
+   }else{
+      exhanoi_3(A , B , C , n-1 , moves)
+      hanoi(C , B , A , 3*n-3 , moves)
+      moves.push([C , B])
+      hanoi(A , C , B , 3*n-2 , moves)
+      hanoi(B , A , C , 3*n , moves)
+   }
 
 }
 
 export const exhanoi_4 = (A, B, C, n, moves) => {
-  alert("complete exhanoi_4 function first!")
+   if(n==1){
+      hanoi(B , C , A , 2 , moves)
+      moves.push([C , A])
+      hanoi(A , B , C , 6 , moves)
+   }else{
+      exhanoi_4(A , B , C , n-1 , moves)
+      hanoi(B , C , A , 2 , moves)
+      hanoi(C , B , A , 6*n-5 , moves)
+      hanoi(A , B , C , 6*n , moves)
+   }
 
 }
